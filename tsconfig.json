@@ -29,5 +29,5 @@
 		"baseUrl": "."
 	},
 	"exclude": ["node_modules"],
-	"include": ["src/**/*.tsx", "src/**/*.ts", "data_source.ts", "index.ts"]
+	"include": ["src/**/*.tsx", "src/**/*.ts", "data_source.ts", "index.ts", "config/auth.ts"]
 }
