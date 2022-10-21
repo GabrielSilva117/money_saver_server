@@ -1,7 +1,6 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
 import { Users } from '../entities/user'
-import { scret_K, test } from '../../config/auth'
 
 const router = express.Router()
 
