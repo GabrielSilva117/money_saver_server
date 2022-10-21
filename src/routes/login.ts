@@ -1,10 +1,12 @@
 import express from 'express'
 import { Users } from '../entities/user'
 import bcrypt from 'bcrypt'
-import { authorize, decodeToken, generateToken } from '../../config/auth'
-import { JwtPayload } from 'jsonwebtoken'
+import { authorize, REFRESH_TOKEN_SECRET, generateRefreshToken, generateToken } from '../../config/auth'
+import jwt from 'jsonwebtoken'
 
 const router = express.Router()
+
+let refreshTokens: string[] = []
 
 router.post('/user/authenticate', async (req, res) => {
   try {
@@ -30,20 +32,30 @@ router.post('/user/authenticate', async (req, res) => {
           msg: "Invalid password! Try again."
         })
       }
-      const token = await generateToken({
+      const AccessToken = await generateToken({
         id: user.id,
         email: email,
         first_name: user.first_name,
         last_name: user.last_name
       })
+
+      const RefreshToken = await generateRefreshToken({
+        id: user.id,
+        email: email,
+        first_name: user.first_name,
+        last_name: user.last_name
+      })
+
+      refreshTokens.push(RefreshToken)
   
       return res.status(201).json({
-        token: token,
+        AccessToken: AccessToken,
         data: {
           email: email,
           first_name: user.first_name,
           last_name: user.last_name
-        }
+        },
+        RefreshToken: RefreshToken
       })
     })  
     return  
@@ -53,40 +65,34 @@ router.post('/user/authenticate', async (req, res) => {
   }
 })
 
-router.post('/refresh-token', async (req, res, next) => {
-  try {
-    const { token } = req.body || req.query || req.headers['x-access-token']
-    const { id } = (await decodeToken(token)) as JwtPayload
-    const user = await Users.findOneBy({ id: id })
-
-    if (!user) {
-      return res.status(404).json({
-        msg: 'User not found!'
-      })
-    }
-
-    const token_Data = await generateToken({
-      id: user.id,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      email: user.email
+router.post('/refresh-token', async (req, res) => {
+  const RefreshToken: string = req.body.RefreshToken
+  if(!RefreshToken) return res.status(400).json({
+    msg: "Invalid or expired Token. Try again!"
+  })
+  console.log(refreshTokens, RefreshToken)
+  if(!refreshTokens.includes(RefreshToken)) return res.status(403).json({
+    msg: "Invalid Token"
+  })
+  jwt.verify(RefreshToken, REFRESH_TOKEN_SECRET, async (error, decoded) => {
+    if (error) return res.status(403)
+    const accessToken = await generateToken(decoded)
+    return res.status(200).json({
+      AccessToken: accessToken
     })
+  })
+  return
+})
 
-    return res.status(201).json({
-      token: token,
-      data: {
-        email: user.email,
-        first_name: user.first_name,
-        last_name: user.last_name
-      }
-    })
-  } catch (err) {
-    return res.status(500).send(err)
-  }
+router.delete('/logout', (req, res) => {
+  refreshTokens = refreshTokens.filter(token => token !== req.body.RefreshToken)
+  res.status(200).json({
+    msg: "User logged out successfully"
+  })
 })
 
 router.post('/api/posts', authorize, (req, res) => {
-  res.json({test: 'sample test'})
+  res.json({auth: 'User authorized'})
 })
 
 
