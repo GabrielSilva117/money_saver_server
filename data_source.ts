@@ -1,15 +1,15 @@
 import { Users } from './src/entities/user'
 import { DataSource } from 'typeorm'
-import { User_documents } from './src/entities/user_document'
-import { Document_types } from './src/entities/document_type'
+import { UserDocuments } from './src/entities/user_document'
+import { DocumentTypes } from './src/entities/document_type'
 import { Tags } from './src/entities/tags'
-import { Entries_tags } from './src/entities/entries_tags'
+import { EntriesTags } from './src/entities/entries_tags'
 import { Entries } from './src/entities/entries'
-import { Entry_types } from './src/entities/entry_types'
-import { Entry_categories } from './src/entities/entry_categories'
-import { Entry_items } from './src/entities/entry_items'
-import { Entry_images } from './src/entities/entry_images'
-import { Entry_subcategories } from './src/entities/entry_subcategories'
+import { EntryTypes } from './src/entities/entry_types'
+import { EntryCategories } from './src/entities/entry_categories'
+import { EntryItems } from './src/entities/entry_items'
+import { EntryImages } from './src/entities/entry_images'
+import { EntrySubcategories } from './src/entities/entry_subcategories'
 
 export const MainDs = new DataSource({
   type: 'postgres',
@@ -18,20 +18,20 @@ export const MainDs = new DataSource({
   username: 'postgres',
   password: undefined,
   database: 'money_saver',
-  synchronize: false,
+  synchronize: true,
   logging: true,
   entities: [
     Users,
-    User_documents,
-    Document_types,
+    UserDocuments,
+    DocumentTypes,
     Tags,
-    Entries_tags,
+    EntriesTags,
     Entries,
-    Entry_types,
-    Entry_categories,
-    Entry_items,
-    Entry_images,
-    Entry_subcategories
+    EntryTypes,
+    EntryCategories,
+    EntryItems,
+    EntryImages,
+    EntrySubcategories
   ],
   subscribers: [],
   migrations: [],

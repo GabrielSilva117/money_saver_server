@@ -3,7 +3,7 @@ import { Entries } from "./entries";
 import { Tags } from "./tags";
 
 @Entity('entries_tags')
-export class Entries_tags extends BaseEntity {
+export class EntriesTags extends BaseEntity {
   @PrimaryColumn()
   entryId: string
 

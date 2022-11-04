@@ -2,7 +2,7 @@ import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, U
 import { Entries } from "./entries";
 
 @Entity('entry_images')
-export class Entry_images extends BaseEntity {
+export class EntryImages extends BaseEntity {
   @PrimaryGeneratedColumn(
     'uuid'
   )

@@ -2,7 +2,7 @@ import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, U
 import { Users } from "./user";
 
 @Entity('entry_categories')
-export class Entry_categories extends BaseEntity {
+export class EntryCategories extends BaseEntity {
   @PrimaryGeneratedColumn(
     'uuid'
   )
@@ -44,6 +44,4 @@ export class Entry_categories extends BaseEntity {
 
   @DeleteDateColumn()
   deleted_at: Date
-
-
 }
