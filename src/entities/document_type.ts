@@ -1,15 +1,12 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany} from "typeorm";
-import { User_documents } from "./user_document";
+import { UserDocuments } from "./user_document";
 
 @Entity('document_types')
-export class Document_types extends BaseEntity{
+export class DocumentTypes extends BaseEntity{
   @PrimaryGeneratedColumn(
     'uuid'
   )
   id: string
-
-  @OneToMany(()=> User_documents, (user_documents) => user_documents.document_type)
-  user_documents: User_documents[]
 
   @Column({
     length: 20,

@@ -1,19 +1,25 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, DeleteDateColumn} from "typeorm";
-import { Document_types } from "./document_type";
+import { DocumentTypes } from "./document_type";
 import { Users } from "./user";
 
 @Entity('user_documents')
-export class User_documents extends BaseEntity {
+export class UserDocuments extends BaseEntity {
   @PrimaryGeneratedColumn(
     'uuid'
   )
   id: string
 
-  @ManyToOne(() => Users, (users) => users.user_documents)
+  @ManyToOne(() => Users, (users) => users.id)
   user: Users
 
-  @ManyToOne(() => Document_types, (document_type) => document_type.user_documents)
-  document_type: Document_types
+  @ManyToOne(() => DocumentTypes, (document_type) => document_type.id)
+  document_type: DocumentTypes
+
+  @Column({
+    unique: true,
+    length: 14
+  })
+  document_cod: string
 
   @Column({
     default: true

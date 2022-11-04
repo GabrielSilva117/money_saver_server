@@ -1,15 +1,15 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne} from "typeorm";
-import { Entry_categories } from "./entry_categories";
+import { EntryCategories } from "./entry_categories";
 
 @Entity('entry_subcategories')
-export class Entry_subcategories extends BaseEntity {
+export class EntrySubcategories extends BaseEntity {
   @PrimaryGeneratedColumn(
     'uuid'
   )
   id: string
 
-  @ManyToOne(() => Entry_categories, entry_categories => entry_categories.id)
-  entry_category: Entry_categories
+  @ManyToOne(() => EntryCategories, entry_categories => entry_categories.id)
+  entry_category: EntryCategories
 
   @Column({
     length: 30

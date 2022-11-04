@@ -1,9 +1,9 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, ManyToOne} from "typeorm";
 import { Entries } from "./entries";
-import { Entry_subcategories } from "./entry_subcategories";
+import { EntrySubcategories } from "./entry_subcategories";
 
 @Entity('entry_items')
-export class Entry_items extends BaseEntity {
+export class EntryItems extends BaseEntity {
   @PrimaryGeneratedColumn(
     'uuid'
   )
@@ -12,7 +12,7 @@ export class Entry_items extends BaseEntity {
   @ManyToOne(() => Entries, entries => entries.id)
   entry: Entries
 
-  @ManyToOne(() => Entry_subcategories, entry_subcategories => entry_subcategories.id)
-  entry_subcategory: Entry_subcategories
+  @ManyToOne(() => EntrySubcategories, entry_subcategories => entry_subcategories.id)
+  entry_subcategory: EntrySubcategories
 
 }

@@ -1,7 +1,7 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
-import { Entry_categories } from "./entry_categories";
+import { EntryCategories } from "./entry_categories";
 import { Tags } from "./tags";
-import { User_documents } from "./user_document";
+import { UserDocuments } from "./user_document";
 
 @Entity('users')
 export class Users extends BaseEntity {
@@ -9,12 +9,6 @@ export class Users extends BaseEntity {
     'uuid'
   )
   id: string
-
-  @OneToMany(() => User_documents, (user_documents) => user_documents.user)
-  user_documents: User_documents[]
-
-  @OneToMany(() => Tags, (tags) => tags.id)
-  tags: Tags[]
 
   @Column({
     length: 40,

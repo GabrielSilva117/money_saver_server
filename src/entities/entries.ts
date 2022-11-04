@@ -1,6 +1,6 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, OneToMany} from "typeorm";
-import { Entry_categories } from "./entry_categories";
-import { Entry_types } from "./entry_types";
+import { EntryCategories } from "./entry_categories";
+import { EntryTypes } from "./entry_types";
 
 @Entity('entries')
 export class Entries extends BaseEntity {
@@ -9,11 +9,11 @@ export class Entries extends BaseEntity {
   )
   id: string
 
-  @ManyToOne(() => Entry_types, (entry_types) => entry_types.id)
-  entry_type: Entry_types
+  @ManyToOne(() => EntryTypes, (entry_types) => entry_types.id)
+  entry_type: EntryTypes
 
-  @ManyToOne(() => Entry_categories, entry_categories => entry_categories.id)
-  entry_category: Entry_categories
+  @ManyToOne(() => EntryCategories, entry_categories => entry_categories.id)
+  entry_category: EntryCategories
 
   @Column({
     type: "decimal", precision: 10, scale: 2
