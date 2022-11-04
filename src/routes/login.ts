@@ -1,7 +1,7 @@
 import express from 'express'
 import { Users } from '../entities/user'
 import bcrypt from 'bcrypt'
-import { authorize, refreshTkn, generateRefreshToken, generateToken } from '../../config/auth'
+import { authorize, refreshTkn, generateRefreshToken, generateToken, accessTkn } from '../../config/auth'
 import jwt from 'jsonwebtoken'
 
 const router = express.Router()
@@ -66,7 +66,7 @@ router.post('/user/authenticate', async (req, res) => {
 })
 
 router.post('/refresh-token', async (req, res) => {
-  const RefreshToken: string = req.body.RefreshToken
+  const RefreshToken: string = req.body.token
   if(!RefreshToken) return res.status(400).json({
     msg: "Invalid or expired Token. Try again!"
   })
@@ -94,6 +94,5 @@ router.delete('/logout', (req, res) => {
 router.post('/api/posts', authorize, (req, res) => {
   res.json({auth: 'User authorized'})
 })
-
 
 export { router as User_Authenticate }
