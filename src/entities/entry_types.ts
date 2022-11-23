@@ -1,11 +1,18 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from "typeorm";
-import { Entries } from "./entries";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToMany
+} from 'typeorm'
+import { Entries } from './entries'
 
 @Entity('entry_types')
-export class EntryTypes extends BaseEntity{
-  @PrimaryGeneratedColumn(
-    'uuid'
-  )
+export class EntryTypes extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @Column({

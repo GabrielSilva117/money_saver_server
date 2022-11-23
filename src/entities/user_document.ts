@@ -1,12 +1,19 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, DeleteDateColumn} from "typeorm";
-import { DocumentTypes } from "./document_type";
-import { Users } from "./user";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn
+} from 'typeorm'
+import { DocumentTypes } from './document_type'
+import { Users } from './user'
 
 @Entity('user_documents')
 export class UserDocuments extends BaseEntity {
-  @PrimaryGeneratedColumn(
-    'uuid'
-  )
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @ManyToOne(() => Users, (users) => users.id)

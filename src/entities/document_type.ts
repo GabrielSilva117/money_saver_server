@@ -1,11 +1,18 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany} from "typeorm";
-import { UserDocuments } from "./user_document";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToMany
+} from 'typeorm'
+import { UserDocuments } from './user_document'
 
 @Entity('document_types')
-export class DocumentTypes extends BaseEntity{
-  @PrimaryGeneratedColumn(
-    'uuid'
-  )
+export class DocumentTypes extends BaseEntity {
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @Column({

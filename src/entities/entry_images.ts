@@ -1,11 +1,19 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany, ManyToOne } from "typeorm";
-import { Entries } from "./entries";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToMany,
+  ManyToOne
+} from 'typeorm'
+import { Entries } from './entries'
 
 @Entity('entry_images')
 export class EntryImages extends BaseEntity {
-  @PrimaryGeneratedColumn(
-    'uuid'
-  )
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @ManyToOne(() => Entries, (entries) => entries.id)

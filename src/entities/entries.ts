@@ -1,22 +1,37 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, OneToMany} from "typeorm";
-import { EntryCategories } from "./entry_categories";
-import { EntryTypes } from "./entry_types";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+  JoinTable
+} from 'typeorm'
+import { EntryCategories } from './entry_categories'
+import { EntryTypes } from './entry_types'
+import { Tags } from './tags'
+import { Users } from './user'
 
 @Entity('entries')
 export class Entries extends BaseEntity {
-  @PrimaryGeneratedColumn(
-    'uuid'
-  )
+  @PrimaryGeneratedColumn('uuid')
   id: string
+
+  @ManyToOne(() => Users, (user) => user.id)
+  user: Users
 
   @ManyToOne(() => EntryTypes, (entry_types) => entry_types.id)
   entry_type: EntryTypes
 
-  @ManyToOne(() => EntryCategories, entry_categories => entry_categories.id)
+  @ManyToOne(() => EntryCategories, (entry_categories) => entry_categories.id)
   entry_category: EntryCategories
 
   @Column({
-    type: "decimal", precision: 10, scale: 2
+    type: 'decimal',
+    precision: 10,
+    scale: 2
   })
   value: number
 

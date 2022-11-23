@@ -1,13 +1,20 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
-import { EntryCategories } from "./entry_categories";
-import { Tags } from "./tags";
-import { UserDocuments } from "./user_document";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn
+} from 'typeorm'
+import { EntryCategories } from './entry_categories'
+import { Tags } from './tags'
+import { UserDocuments } from './user_document'
 
 @Entity('users')
 export class Users extends BaseEntity {
-  @PrimaryGeneratedColumn(
-    'uuid'
-  )
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @Column({
@@ -32,7 +39,7 @@ export class Users extends BaseEntity {
     nullable: false,
     length: 50
   })
-  email:string
+  email: string
 
   @Column({
     length: 255
@@ -53,4 +60,3 @@ export class Users extends BaseEntity {
   @DeleteDateColumn()
   deleted_at: Date
 }
-

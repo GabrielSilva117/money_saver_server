@@ -1,16 +1,26 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToOne, OneToMany} from "typeorm";
-import { EntriesTags } from "./entries_tags";
-import { Users } from "./user";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+  OneToMany,
+  ManyToMany,
+  JoinTable
+} from 'typeorm'
+import { Entries } from './entries'
+import { Users } from './user'
 
 @Entity('tags')
 export class Tags extends BaseEntity {
-  @PrimaryGeneratedColumn(
-    'uuid'
-  )
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @ManyToOne(() => Users, (user) => user.id)
-  user_id: Users  
+  user_id: Users
 
   @Column({
     length: 20,
@@ -23,7 +33,7 @@ export class Tags extends BaseEntity {
     nullable: false
   })
   color: string
-  
+
   @Column({
     default: true
   })

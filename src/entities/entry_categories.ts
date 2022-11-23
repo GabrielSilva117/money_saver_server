@@ -1,11 +1,19 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany, ManyToOne } from "typeorm";
-import { Users } from "./user";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToMany,
+  ManyToOne
+} from 'typeorm'
+import { Users } from './user'
 
 @Entity('entry_categories')
 export class EntryCategories extends BaseEntity {
-  @PrimaryGeneratedColumn(
-    'uuid'
-  )
+  @PrimaryGeneratedColumn('uuid')
   id: string
 
   @ManyToOne(() => Users, (users) => users.id)
@@ -27,7 +35,8 @@ export class EntryCategories extends BaseEntity {
   color: string
 
   @Column({
-    length: 30
+    length: 30,
+    nullable: true
   })
   icon: string
 
