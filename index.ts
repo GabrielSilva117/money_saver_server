@@ -5,8 +5,10 @@ import { User_Authenticate } from './src/routes/login'
 import { User_Document_Create } from './src/routes/create_user_doc'
 import { User_Tag_Create } from './src/routes/create_tag'
 import { Create_Entry_Cat_Icon } from './src/routes/create_entry_cat_icon'
+import { User_Entry_Create } from './src/routes/create_entry'
 import { Entry_Category_Create } from './src/routes/create_entry_cat'
 import { Entry_Type_Create } from './src/routes/create_entry_typ'
+import { Entry_Img_Create } from './src/routes/create_entry_img'
 
 const app = express()
 const port = process.env.PORT || 8000
@@ -16,10 +18,18 @@ const main = async () => {
     MainDs.initialize()
     console.log('Connected to the Database')
     app.use(express.json())
-    app.use([Register_User, User_Authenticate, User_Document_Create, User_Tag_Create])
+    app.use(express.static(__dirname))
+    app.use([
+      Register_User,
+      User_Authenticate,
+      User_Document_Create,
+      User_Tag_Create,
+      User_Entry_Create,
       Entry_Category_Create,
       Entry_Type_Create,
       Create_Entry_Cat_Icon,
+      Entry_Img_Create      
+    ])
     app.listen(port, () => {
       console.log(`Server running on port: ${port}`)
     })

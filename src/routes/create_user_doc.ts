@@ -1,4 +1,4 @@
-import { authorize, accessTkn} from '../../config/auth'
+import { authorize, accessTkn } from '../../config/auth'
 import express from 'express'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { Users } from '../entities/user'
@@ -9,7 +9,7 @@ const router = express.Router()
 router.post('/user/documents', authorize, async (req, res) => {
   try {
     const token = req.headers['usr'] as JwtPayload
-    const {document_code, document_typeId } = req.body
+    const { document_code, document_typeId } = req.body
 
     console.log(document_code, document_typeId)
 
@@ -17,16 +17,16 @@ router.post('/user/documents', authorize, async (req, res) => {
       return res.sendStatus(403)
     }
 
-    if( !document_code || !document_typeId ) {
+    if (!document_code || !document_typeId) {
       return res.status(403).json({
         msg: 'Invalid Document code or Type Id'
       })
     }
-  
+
     const bearer = token.split(' ')[1]
-  
+
     await jwt.verify(bearer, accessTkn, async (err, decoded) => {
-      if(err) {
+      if (err) {
         return res.status(403).json({
           msg: 'invalid or expired token'
         })
@@ -38,16 +38,16 @@ router.post('/user/documents', authorize, async (req, res) => {
       })
 
       await usr_doc.save()
-      
+
       return res.status(201).json({
         UserDocument: usr_doc
       })
     })
-    return 
+    return
   } catch (err) {
     console.error(err)
     return res.sendStatus(500)
   }
 })
 
-export { router as User_Document_Create } 
+export { router as User_Document_Create }

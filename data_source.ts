@@ -3,7 +3,6 @@ import { DataSource } from 'typeorm'
 import { UserDocuments } from './src/entities/user_document'
 import { DocumentTypes } from './src/entities/document_type'
 import { Tags } from './src/entities/tags'
-import { EntriesTags } from './src/entities/entries_tags'
 import { Entries } from './src/entities/entries'
 import { EntryTypes } from './src/entities/entry_types'
 import { EntryCategories } from './src/entities/entry_categories'
@@ -25,7 +24,6 @@ export const MainDs = new DataSource({
     UserDocuments,
     DocumentTypes,
     Tags,
-    EntriesTags,
     Entries,
     EntryTypes,
     EntryCategories,
