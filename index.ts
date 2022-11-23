@@ -4,6 +4,7 @@ import { Register_User } from './src/routes/register_user'
 import { User_Authenticate } from './src/routes/login'
 import { User_Document_Create } from './src/routes/create_user_doc'
 import { User_Tag_Create } from './src/routes/create_tag'
+import { Create_Entry_Cat_Icon } from './src/routes/create_entry_cat_icon'
 import { Entry_Category_Create } from './src/routes/create_entry_cat'
 
 const app = express()
@@ -16,6 +17,7 @@ const main = async () => {
     app.use(express.json())
     app.use([Register_User, User_Authenticate, User_Document_Create, User_Tag_Create])
       Entry_Category_Create,
+      Create_Entry_Cat_Icon,
     app.listen(port, () => {
       console.log(`Server running on port: ${port}`)
     })
