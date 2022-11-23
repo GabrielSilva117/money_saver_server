@@ -4,6 +4,7 @@ import { Register_User } from './src/routes/register_user'
 import { User_Authenticate } from './src/routes/login'
 import { User_Document_Create } from './src/routes/create_user_doc'
 import { User_Tag_Create } from './src/routes/create_tag'
+import { Entry_Category_Create } from './src/routes/create_entry_cat'
 
 const app = express()
 const port = process.env.PORT || 8000
@@ -14,6 +15,7 @@ const main = async () => {
     console.log('Connected to the Database')
     app.use(express.json())
     app.use([Register_User, User_Authenticate, User_Document_Create, User_Tag_Create])
+      Entry_Category_Create,
     app.listen(port, () => {
       console.log(`Server running on port: ${port}`)
     })
