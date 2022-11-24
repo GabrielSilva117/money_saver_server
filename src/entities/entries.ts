@@ -7,7 +7,8 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   ManyToOne,
-  JoinTable
+  JoinTable,
+  ManyToMany
 } from 'typeorm'
 import { EntryCategories } from './entry_categories'
 import { EntryTypes } from './entry_types'
@@ -27,6 +28,20 @@ export class Entries extends BaseEntity {
 
   @ManyToOne(() => EntryCategories, (entry_categories) => entry_categories.id)
   entry_category: EntryCategories
+
+  @ManyToMany(() => Tags)
+  @JoinTable({
+    name: 'entries_tags',
+    joinColumn: {
+      name: 'entryId',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'tagId',
+      referencedColumnName: 'id'
+    }
+  })
+  tags: Tags[]
 
   @Column({
     type: 'decimal',

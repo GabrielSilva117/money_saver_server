@@ -22,6 +22,9 @@ export class Tags extends BaseEntity {
   @ManyToOne(() => Users, (user) => user.id)
   user_id: Users
 
+  @ManyToMany(() => Entries)
+  entries: Entries
+
   @Column({
     length: 20,
     nullable: false
