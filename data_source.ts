@@ -29,7 +29,7 @@ export const MainDs = new DataSource({
     EntryCategories,
     EntryItems,
     EntryImages,
-    EntrySubcategories
+    EntrySubcategories,
   ],
   subscribers: [],
   migrations: [],

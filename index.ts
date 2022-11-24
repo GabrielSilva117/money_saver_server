@@ -10,6 +10,7 @@ import { Entry_Category_Create } from './src/routes/create_entry_cat'
 import { Entry_Type_Create } from './src/routes/create_entry_typ'
 import { Entry_Img_Create } from './src/routes/create_entry_img'
 import { Connect_Entry_Tags } from './src/routes/connect_entries_tags'
+import { Create_Entry_Subcat } from './src/routes/create_entry_sub_cat'
 
 const app = express()
 const port = process.env.PORT || 8000
@@ -30,7 +31,8 @@ const main = async () => {
       Entry_Type_Create,
       Create_Entry_Cat_Icon,
       Entry_Img_Create,
-      Connect_Entry_Tags
+      Connect_Entry_Tags,
+      Create_Entry_Subcat,
     ])
     app.listen(port, () => {
       console.log(`Server running on port: ${port}`)
