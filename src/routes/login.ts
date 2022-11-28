@@ -2,7 +2,7 @@ import express from 'express'
 import { Users } from '../entities/user'
 import bcrypt from 'bcrypt'
 import { authorize, refreshTkn, generateRefreshToken, generateToken, accessTkn } from '../../config/auth'
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 const router = express.Router()
 
@@ -82,8 +82,9 @@ router.post('/refresh-token', async (req, res) => {
     msg: "Invalid Token"
   })
   jwt.verify(RefreshToken, refreshTkn, async (error, decoded) => {
-    if (error) return res.status(403)
-    const accessToken = await generateToken(decoded)
+    if (error) return res.sendStatus(403)
+    const data = decoded as JwtPayload
+    const accessToken = await jwt.sign(data, accessTkn, { expiresIn: '15m'})
     return res.status(200).json({
       AccessToken: accessToken
     })
