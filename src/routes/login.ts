@@ -27,11 +27,18 @@ router.post('/user/authenticate', async (req, res) => {
     }
     
     bcrypt.compare(password, user.password, async (err, result) => {
-      if (!result || err) {
+      if (!result) {
         return res.status(400).json({
           msg: "Invalid password! Try again."
         })
       }
+
+      if (err) {
+        return res.status(500).json({
+          msg: `An error occured! ${err}`
+        })
+      }
+
       const AccessToken = await generateToken({
         id: user.id,
         email: email,
